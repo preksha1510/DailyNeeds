@@ -1,0 +1,36 @@
+.navbarContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 20px;
+}
+
+.navLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.navLink {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s, text-decoration 0.3s;
+  margin-right: 15px;
+}
+
+.navLink:last-child {
+  margin-right: 0;
+}
+
+.navLink:hover {
+  color: lightblue;
+  text-decoration: underline;
+}
+
+.activeNavLink {
+  font-weight: bold;
+  color: lightblue;
+  text-decoration: underline;
+}
