@@ -28,7 +28,7 @@ const Navbar = () => {
           <NavLink
             to="/pricelist"
             className={styles.navLink}
-            activeClassName={styles.activeNavLink}
+            // activeClassName={styles.activeNavLink}
             style={{ textDecoration: "none", marginLeft: "15px" }}
           >
             PriceList
