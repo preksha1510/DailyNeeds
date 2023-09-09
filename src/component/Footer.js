@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./Footer.css";
+import axios from "axios";
 
 const Footer = () => {
   const [version, setVersion] = useState("");
 
   useEffect(() => {
-    fetch("/version")
-      .then((response) => response.json())
-      .then((data) => {
-        const currentVersion = data.CurrentVersion;
-        console.log(currentVersion);
+    axios
+      .get("/version")
+      .then((response) => {
+        console.log(response.data.CurrentVersion);
+        const currentVersion = response.data.CurrentVersion;
         setVersion(currentVersion);
       })
       .catch((error) => console.error("Error fetching version:", error));
@@ -17,9 +18,9 @@ const Footer = () => {
 
   return (
     <footer className="footer">
-      <p>
-        &copy; {new Date().getFullYear()} <body>Daily Needs</body>:{version}
-      </p>
+      <div>
+        <h6>Daily Needs</h6>:{version}
+      </div>
     </footer>
   );
 };
