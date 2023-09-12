@@ -1,0 +1,18 @@
+fileignoreconfig:
+  - filename: package-lock.json
+    checksum: 225b98a0c32357baa29f9a26f050f79cb84afa393854a5de1183efea3c9d73af
+  - filename: yarn.lock
+    checksum: 9510b4c37ac1e51ec74310e40c7119ec70da31bccdfcea54666d61b8da0741ab
+  - filename: src/pages/PriceList.js
+    checksum: 54b2c2425e6c8cd82ecc6eee6071163047c1298a7b587f8ae6e73cc410bc0b22
+version: ""
+
+fileignoreconfig:
+- filename: src/pages/PriceList.js
+  checksum: 6dc39c721a7ac01a0ff6b91389bc1f0c8298d46ba50f095247f904b163470dfc
+version: ""
+
+fileignoreconfig:
+- filename: src/pages/PriceList.js
+  checksum: 92150a700808edc068d429187a7110559289191df421932dbd5de5157cec0fa4
+version: ""

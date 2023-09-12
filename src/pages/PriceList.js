@@ -36,6 +36,10 @@ function PriceList() {
       .catch((error) => console.error("Error:", error));
   }, []);
 
+  const addItemToList = (newItem) => {
+    setData((prevData) => [...prevData, newItem]);
+  };
+
   return (
     <>
       <div>
@@ -47,16 +51,21 @@ function PriceList() {
               <th>Price</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody data-testid="t-body">
             {data.map((item) => (
-              <tr width={50} key={item.id}>
+              <tr width={50} key={item.id} data-testid="row-${index + 1}">
                 <td width={100}>{item.id}</td>
 
                 <td width={100}>{item.itemName}</td>
                 <td width={50}>{item.price}</td>
 
                 <td>
-                  <button onClick={() => openEditDialogBox(item)}>Edit</button>
+                  <button
+                    onClick={() => openEditDialogBox(item)}
+                    data-testid="edit-${index + 1}-button"
+                  >
+                    Edit
+                  </button>
                 </td>
               </tr>
             ))}
@@ -67,7 +76,11 @@ function PriceList() {
             Add
           </button>
           {openAddDialog && (
-            <AddItemsDialog open={openAddDialog} onClose={handleClose} />
+            <AddItemsDialog
+              open={openAddDialog}
+              onClose={handleClose}
+              onAddItem={addItemToList}
+            />
           )}
           {openEditDialog && selectedItem && (
             <EditItemDialog

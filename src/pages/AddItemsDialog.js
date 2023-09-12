@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import "../styles/dialog.css";
 import axios from "axios";
 
-const AddItemsDialog = ({ onClose }) => {
+const AddItemsDialog = ({ onClose, onAddItem }) => {
   const [itemName, setItemName] = useState("");
   const [itemPrice, setItemPrice] = useState("");
+  const [error, setError] = useState("");
+  const isButtonDisabled = itemName === "" || itemPrice === "";
 
   const handleItemNameChange = (e) => {
     setItemName(e.target.value);
@@ -14,7 +16,12 @@ const AddItemsDialog = ({ onClose }) => {
     setItemPrice(e.target.value);
   };
 
-  const handleOKClick = () => {
+  const handleADDClick = () => {
+    if (!itemName || !itemPrice) {
+      setError("Please fill out both fields.");
+      return;
+    }
+
     const data = {
       itemName: itemName,
       price: parseFloat(itemPrice),
@@ -22,7 +29,10 @@ const AddItemsDialog = ({ onClose }) => {
 
     axios
       .post("/priceList", data)
-      .then((response) => {})
+      .then((response) => {
+        const newItem = response.data;
+        onAddItem(newItem);
+      })
       .catch((error) => console.error("Error:", error));
 
     onClose();
@@ -36,7 +46,7 @@ const AddItemsDialog = ({ onClose }) => {
         </button>
       </div>
       <div className="dialog-content">
-        <h2>Add Item</h2>
+        <h2 data-testid="header">Add Item</h2>
         <div>
           <label htmlFor="itemName">Item Name:</label>
           <input
@@ -55,9 +65,14 @@ const AddItemsDialog = ({ onClose }) => {
             onChange={handleItemPriceChange}
           />
         </div>
+        {error && <p className="error-message">{error}</p>}
       </div>
       <div className="dialog-footer">
-        <button className="ok-button" onClick={handleOKClick}>
+        <button
+          className="add-button-submit"
+          onClick={handleADDClick}
+          disabled={isButtonDisabled}
+        >
           ADD
         </button>
       </div>

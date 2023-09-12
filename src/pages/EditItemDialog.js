@@ -23,7 +23,7 @@ const EditItemDialog = ({ onClose, itemToEdit }) => {
         </button>
       </div>
       <div className="dialog-content">
-        <h2>Edit Item</h2>
+        <h2 data-testid="editHeader">Edit Item</h2>
         <div>
           <label htmlFor="itemName">Item Name:</label>
           <input
