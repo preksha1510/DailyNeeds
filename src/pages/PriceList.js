@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AddItemsDialog from "./AddItemsDialog";
+import EditItemDialog from "./EditItemDialog";
 
 function PriceList() {
   const [data, setData] = useState([]);
 
-  const [openDialog, handleDisplay] = useState(false);
+  const [openAddDialog, setOpenAddDialog] = useState(false);
+  const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const handleClose = () => {
-    handleDisplay(false);
+    setOpenAddDialog(false);
+    setOpenEditDialog(false);
+    setSelectedItem(null);
   };
 
-  const openDialogBox = () => {
-    handleDisplay(true);
+  const openAddDialogBox = () => {
+    setOpenAddDialog(true);
+  };
+
+  const openEditDialogBox = (item) => {
+    setSelectedItem(item);
+    setOpenEditDialog(true);
   };
 
   useEffect(() => {
@@ -20,6 +30,7 @@ function PriceList() {
       .get("/priceList")
       .then((response) => {
         const priceList = response.data;
+        priceList.sort((a, b) => a.id - b.id);
         setData(priceList);
       })
       .catch((error) => console.error("Error:", error));
@@ -31,27 +42,39 @@ function PriceList() {
         <table>
           <thead>
             <tr>
-              <th>ID</th>
+              <th width={50}>ID</th>
               <th>Item Name</th>
               <th>Price</th>
             </tr>
           </thead>
           <tbody>
             {data.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.itemName}</td>
-                <td>{item.price}</td>
+              <tr width={50} key={item.id}>
+                <td width={100}>{item.id}</td>
+
+                <td width={100}>{item.itemName}</td>
+                <td width={50}>{item.price}</td>
+
+                <td>
+                  <button onClick={() => openEditDialogBox(item)}>Edit</button>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
         <div>
-          <button data-testid="add-button" onClick={openDialogBox}>
+          <button data-testid="add-button" onClick={openAddDialogBox}>
             Add
           </button>
-          {openDialog && (
-            <AddItemsDialog open={openDialog} onClose={handleClose} />
+          {openAddDialog && (
+            <AddItemsDialog open={openAddDialog} onClose={handleClose} />
+          )}
+          {openEditDialog && selectedItem && (
+            <EditItemDialog
+              open={openEditDialog}
+              onClose={handleClose}
+              itemToEdit={selectedItem}
+            />
           )}
         </div>
       </div>
