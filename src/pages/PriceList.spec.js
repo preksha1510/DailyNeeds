@@ -71,51 +71,5 @@ describe("Basic rendereing of PriceList items", () => {
     });
   });
 
-  // it("should open the edit dialog box when the edit button is clicked", async () => {
-  //   const mockData = [
-  //     { id: 1, itemName: "Item1", price: 10.0 },
-  //     { id: 2, itemName: "Item2", price: 20.0 },
-  //   ];
-  //   axios.get.mockResolvedValue({ data: mockData });
-
-  //   render(<PriceList />);
-
-  //   await waitFor(() => {
-  //     const table = screen.getByTestId("t-body");
-  //     const row = screen.getByTestId("edit-1-button");
-  //     const editButton = within(row).getByText("Edit");
-  //   });
-
-  //   console.log(table);
-  // const customMockTable = (
-  //   <table>
-  //     <thead>
-  //       <tr>
-  //         <th>ID</th>
-  //         <th>Item Name</th>
-  //         <th>Price</th>
-  //       </tr>
-  //     </thead>
-  //     <tbody>
-  //       {mockData.map((item) => (
-  //         <tr key={item.id}>
-  //           <td>{item.id}</td>
-  //           <td>{item.itemName}</td>
-  //           <td>{item.price}</td>
-  //           <td>
-  //             <button>Edit</button>
-  //           </td>
-  //         </tr>
-  //       ))}
-  //     </tbody>
-  //   </table>
-  // );
-
-  // console.log(customMockTable);
-
-  //   fireEvent.click(editButton);
-
-  //   const editDialogTitle = screen.getByText("Edit Item");
-  //   expect(editDialogTitle).toBeInTheDocument();
-  // });
+ 
 });
